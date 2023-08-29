@@ -159,7 +159,7 @@ static void *mpmc_find_cell(node_t *volatile *ptr, long i, handle_t *th)
 
     /* now we get the needed cell */
     // ZDDD
-    return &curr->cells[i & ZDDD];
+    return &curr->cells[i & N_BITS];
 }
 
 #include <linux/futex.h>
@@ -200,7 +200,7 @@ void mpmc_enqueue(mpmc_t *q, handle_t *th, void *v)
      * waiting value and wake it
      */
     // ZAAA
-    *((int *) cv) = ZAAA;
+    *((int *) cv) = 0;
     mpmc_futex_wake(cv, 1);
 }
 
